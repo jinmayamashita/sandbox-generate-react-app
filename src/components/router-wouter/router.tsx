@@ -8,7 +8,7 @@ function ErrorPage() {
   return <div>404</div>;
 }
 
-export function Router() {
+export default function Router() {
   return (
     <Switch>
       <Route path="/" component={HomePage} />

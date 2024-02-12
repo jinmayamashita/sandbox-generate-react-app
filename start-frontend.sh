@@ -22,7 +22,7 @@ mkdir $destination/src
 mkdir $destination/src/modules
 
 for module in "${modules[@]}"; do
-  mkdir temp/src/modules/$module
+  mkdir $destination/src/modules/$module && cp -R ./src/components/$module/* $destination/src/modules/$module
 done
 
 # Copy base files
@@ -34,16 +34,14 @@ cp -R ./tsconfig.json $destination
 cp -R ./tsconfig.node.json $destination
 cp -R ./vite.config.ts $destination
 cp -R ./src/app.tsx $destination/src
-# cp -R ./src/modules/auth/routes.tsx ./temp/src
-# cp -R ./.eslintrc.cjs ./temp
 
 # Copy router
 cp -R ./src/components/router-$router/$router_file $destination/src/router.tsx
 
 # Copy modules
-for module in "${modules[@]}"; do
-  cp -R ./src/components/$module/* $destination/src/modules/$module
-done
+# for module in "${modules[@]}"; do
+#   cp -R ./src/components/$module/* $destination/src/modules/$module
+# done
 
 # Templates
 for module in "${modules[@]}"; do
@@ -54,7 +52,6 @@ done
 
 ./node_modules/.bin/plop component -- $args
 ./node_modules/.bin/prettier -w $destination/src/app-providers.tsx
-# cp -R ./src/app.tsx $destination/src
 
 # README
 markdown_text="# App name\n\nOpen up your terminal and run\n\n\`\`\`sh\npnpm dev\n\`\`\`\n\nCreated on $(date)"

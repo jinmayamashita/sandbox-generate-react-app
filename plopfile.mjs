@@ -28,7 +28,9 @@ export default (plop) => {
         ],
       },
     ],
-    actions: () => {
+    actions: ({ providers }) => {
+      const hasAuth = providers.filter(({ name }) => name === "authentication");
+
       return [
         {
           type: "add",
@@ -36,12 +38,16 @@ export default (plop) => {
           path: "./temp/src/app-providers.tsx",
           templateFile: "./src/templates/app-providers.hbs",
         },
-        {
-          type: "add",
-          force: true,
-          path: "./temp/src/app.tsx",
-          templateFile: "./src/templates/app.hbs",
-        },
+        ...(hasAuth.length
+          ? [
+              {
+                type: "add",
+                force: true,
+                path: "./temp/src/app.tsx",
+                templateFile: "./src/templates/app.hbs",
+              },
+            ]
+          : []),
       ];
     },
   });
