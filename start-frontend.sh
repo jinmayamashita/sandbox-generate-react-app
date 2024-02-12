@@ -1,10 +1,11 @@
 #!/bin/sh
 
 # User input
+#========================================================================
 modules=("theme" "authentication") # theme | authentication
 router="wouter" # react-router | wouter
-
 destination="./temp"
+#========================================================================
 
 # Check router
 if [[ " ${modules[*]} " == *"authentication"* ]]; then
