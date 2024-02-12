@@ -3,7 +3,7 @@
 # User input
 #========================================================================
 modules=("theme" "authentication") # theme | authentication
-router="wouter" # react-router | wouter
+router="react-router" # react-router | wouter
 destination="./temp"
 #========================================================================
 
@@ -20,11 +20,11 @@ echo "Create React App..."
 rm -rf ./$destination
 mkdir $destination
 mkdir $destination/src
-mkdir $destination/src/modules
+mkdir $destination/src/components
 
 # Copy modules
 for module in "${modules[@]}"; do
-  mkdir $destination/src/modules/$module && cp -R ./src/components/$module/* $destination/src/modules/$module
+  mkdir $destination/src/components/$module && cp -R ./src/components/$module/* $destination/src/components/$module
 done
 
 # Copy base files
@@ -36,6 +36,7 @@ cp -R ./tsconfig.json $destination
 cp -R ./tsconfig.node.json $destination
 cp -R ./vite.config.ts $destination
 cp -R ./src/app.tsx $destination/src
+cp -R ./src/ui/* $destination/src/components
 
 # Copy router
 cp -R ./src/components/router-$router/$router_file $destination/src/router.tsx

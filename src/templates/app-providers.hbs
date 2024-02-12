@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 {{#each providers}}
-import {{this.component}} from "@/modules/{{this.name}}";
+import {{this.component}} from "@/components/{{this.name}}";
 {{/each}}
 
 export default function AppProviders({ children }: PropsWithChildren) {
