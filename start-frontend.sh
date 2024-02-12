@@ -21,6 +21,7 @@ mkdir $destination
 mkdir $destination/src
 mkdir $destination/src/modules
 
+# Copy modules
 for module in "${modules[@]}"; do
   mkdir $destination/src/modules/$module && cp -R ./src/components/$module/* $destination/src/modules/$module
 done
@@ -37,11 +38,6 @@ cp -R ./src/app.tsx $destination/src
 
 # Copy router
 cp -R ./src/components/router-$router/$router_file $destination/src/router.tsx
-
-# Copy modules
-# for module in "${modules[@]}"; do
-#   cp -R ./src/components/$module/* $destination/src/modules/$module
-# done
 
 # Templates
 for module in "${modules[@]}"; do
