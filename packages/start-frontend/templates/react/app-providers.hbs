@@ -1,0 +1,16 @@
+import { PropsWithChildren } from "react";
+{{#each providers}}
+import {{this.component}} from "@/components/{{this.name}}";
+{{/each}}
+
+export default function AppProviders({ children }: PropsWithChildren) {
+  return (
+    {{#each providers}}
+    <{{this.component}}>
+    {{/each}}
+      {children}
+    {{#reverseEach providers}}
+    </{{this.component}}>
+    {{/reverseEach}}
+  );
+}

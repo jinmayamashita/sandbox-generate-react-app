@@ -1,0 +1,8 @@
+import { useAuthentication } from "@/components/authentication";
+import Router from "./router";
+
+export default function App() {
+  const { isAuthenticated } = useAuthentication();
+  
+  return <Router isAuthenticated={isAuthenticated} />;
+}

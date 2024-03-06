@@ -1,0 +1,17 @@
+{
+  "name": "@code-react/dark-theme",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "type": "tsc --noEmit"
+  },
+  "type": "module",
+  "dependencies": {
+    "react": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.61",
+    "typescript": "5.3.3",
+    "@repo/typescript-config": "workspace:*"
+  }
+}
