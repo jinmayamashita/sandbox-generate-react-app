@@ -22,7 +22,7 @@ type Inputs = {
   destination: string;
 };
 
-async function generateCode({ ui, destination, functions }: Inputs) {
+async function generateCode({ ui, api, destination, functions }: Inputs) {
   // Copy the core files
   execSync(
     `rsync -avq --exclude='node_modules' "${CODE_DIRECTORY}/${ui}/core/" "${destination}"`
@@ -33,6 +33,19 @@ async function generateCode({ ui, destination, functions }: Inputs) {
     execSync(
       `rsync -avq --exclude={'node_modules','package.json','tsconfig.json'} "${CODE_DIRECTORY}/${ui}/functions/${func}/" "${destination}/src/components/${func}"`
     );
+  }
+
+  // Copy API module
+  if (api) {
+    // TODO: Filter out test files if testing module was not selected
+    const isTestIncluded = true;
+    const filter = isTestIncluded ? '': '--exclude *.test*'
+    execSync(
+      `mkdir -p "${destination}/src/components/api/" && rsync -av ${filter} "${CODE_DIRECTORY}/${ui}/api/${api}/src/components/api/" "${destination}/src/components/api/"`
+    )
+    execSync(
+      `mkdir -p "${destination}/src/hooks/" && rsync -av ${filter} "${CODE_DIRECTORY}/${ui}/api/${api}/src/hooks/" "${destination}/src/hooks/"`
+    )
   }
 
   // Copy routing files
@@ -67,17 +80,16 @@ async function main() {
           ],
         }),
 
-      // TODO:
-      // api: () =>
-      //   p.select({
-      //     message: "Choose an API architecture for your project:",
-      //     initialValue: "restful",
-      //     options: [
-      //       { label: "RESTful APIs", value: "restful" },
-      //       { label: "GraphQL", value: "graphql" },
-      //       { label: "gRPC", value: "grpc" },
-      //     ],
-      //   }),
+      api: () =>
+        p.select({
+          message: "Choose an API architecture for your project:",
+          initialValue: "restful",
+          options: [
+            { label: "RESTful APIs", value: "restful" },
+            { label: "GraphQL", value: "graphql" },
+            // { label: "gRPC", value: "grpc" },
+          ],
+        }),
 
       functions: () =>
         p.multiselect({
