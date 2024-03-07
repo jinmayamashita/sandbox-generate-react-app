@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  },
+  "extends": "@repo/typescript-config/react-web.json",
+  "include": ["./src"]
+}
